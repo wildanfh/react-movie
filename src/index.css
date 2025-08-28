@@ -1,15 +1,29 @@
+/* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
+/* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Theme variables */
+@theme {
+  --color-primary: #030014;
+  --color-light-100: #cecefb;
+  --color-light-200: #a8b5db;
+  --color-gray-100: #9ca4ab;
+  --color-dark-100: #0f0d23;
+  --font-dm-sans: DM Sans, sans-serif;
+  --breakpoint-xs: 480px;
+}
+
+/* Base styles */
 @layer base {
   body {
     font-family: "DM Sans", serif;
     font-optical-sizing: auto;
-    background: #140f00;
+    background: #030014;
   }
 
   h1 {
@@ -33,6 +47,7 @@
   }
 }
 
+/* Components */
 @layer components {
   .pattern {
     @apply w-full h-screen bg-center bg-cover absolute z-0;
@@ -64,8 +79,7 @@
   }
 
   .search {
-    @apply w-full px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto;
-    background-color: rgba(206, 206, 251, 0.05);
+    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto;
 
     & div {
       @apply relative flex items-center;
@@ -76,10 +90,7 @@
     }
 
     & input {
-      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 outline-none;
-      &::placeholder {
-        color: #a8b5db;
-      }
+      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
     }
   }
 
@@ -88,13 +99,12 @@
 
     & ul {
       @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+      /* hide-scrollbar tidak perlu karena grid biasanya tidak scroll horizontal */
     }
   }
 
   .movie-card {
-    @apply p-5 rounded-2xl shadow-inner;
-    background-color: #0f0d23;
-    box-shadow: inset 0 1px 2px rgba(206, 206, 251, 0.1);
+    @apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10;
 
     & img {
       @apply rounded-lg h-auto w-full;
@@ -113,7 +123,7 @@
     }
 
     & .rating img {
-      @apply w-4 h-4 object-contain;
+      @apply size-4 object-contain;
     }
 
     & .rating p {
@@ -121,28 +131,27 @@
     }
 
     & .content span {
-      @apply text-sm;
-      color: #9ca4ab;
+      @apply text-sm text-gray-100;
     }
 
     & .content .lang {
-      @apply capitalize font-medium text-base;
-      color: #9ca4ab;
+      @apply capitalize text-gray-100 font-medium text-base;
     }
 
     & .content .year {
-      @apply font-medium text-base;
-      color: #9ca4ab;
+      @apply text-gray-100 font-medium text-base;
     }
   }
 }
 
+/* Utilities */
 @layer utilities {
+  .bg-linear-to-r {
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  }
+
   .text-gradient {
-    background: linear-gradient(to right, #D6C7FF, #AB8BFF);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent;
   }
 
   .fancy-text {
@@ -155,8 +164,12 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  .outline-hidden {
+    outline: none;
   }
 }

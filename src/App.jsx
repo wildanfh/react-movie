@@ -96,7 +96,8 @@ const App = () => {
           <section className="trending">
             <h2>Trending Movies</h2>
 
-            <ul>
+            <ul className="flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar">
+
               {trendingMovies.map((movie, index) => (
                 <li key={movie.$id}>
                   <p className='mr-4'>{index + 1}</p>
