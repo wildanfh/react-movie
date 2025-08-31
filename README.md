@@ -1,5 +1,7 @@
 # Movie Search App
 
+https://wildanfh-react-movie.netlify.app/
+
 This project is a React-based web application that allows users to
 search for movies using The Movie Database (TMDb) API. It also fetches
 trending movies and keeps track of search counts using Appwrite backend
